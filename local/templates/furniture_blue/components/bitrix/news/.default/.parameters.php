@@ -22,6 +22,10 @@ $arTemplateParameters = array(
 		"TYPE" => "CHECKBOX",
 		"DEFAULT" => "Y",
 	),
+	"ID_BLOCK_CANONICAL" => Array(
+		"NAME" => GetMessage("ID_BLOCK_CANONICAL"),
+		"TYPE" => "STRING",
+	),
 	"USE_SHARE" => Array(
 		"NAME" => GetMessage("T_IBLOCK_DESC_NEWS_USE_SHARE"),
 		"TYPE" => "CHECKBOX",
@@ -79,5 +83,3 @@ if ($arCurrentValues["USE_SHARE"] == "Y")
 		"DEFAULT" => "",
 	);
 }
-
-?>
