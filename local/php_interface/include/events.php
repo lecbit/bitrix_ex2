@@ -4,6 +4,8 @@ IncludeModuleLangFile(__FILE__);
 // файл /bitrix/php_interface/init.php
 // регистрируем обработчик
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", array("Ex2", "Ex2_50"));
+AddEventHandler("main", "OnEpilog", array("Ex2", "Ex2_93"));
+
 
 class Ex2
 {
@@ -32,6 +34,25 @@ class Ex2
                     return false;
                 }
             }
+        }
+    }
+
+    function Ex2_93()
+    {
+        if (defined("ERROR_404") && ERROR_404 == "Y") {
+            global $APPLICATION;
+            $APPLICATION->RestartBuffer();
+            include $_SERVER["DOCUMENT_ROOT"] . SITE_TEMPLATE_PATH . "/header.php";
+            include $_SERVER["DOCUMENT_ROOT"] . "/404.php";
+            include $_SERVER["DOCUMENT_ROOT"] . SITE_TEMPLATE_PATH . "/footer.php";
+
+            CEventLog::Add(array(
+                "SEVERITY" => "SECURITY",
+                "AUDIT_TYPE_ID" => "ERROR 404",
+                "MODULE_ID" => "main",
+                "ITEM_ID" => 123,
+                "DESCRIPTION" => "Какое-то описание",
+            ));
         }
     }
 }
