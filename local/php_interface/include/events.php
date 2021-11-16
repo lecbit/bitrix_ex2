@@ -5,6 +5,7 @@ IncludeModuleLangFile(__FILE__);
 // регистрируем обработчик
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", array("Ex2", "Ex2_50"));
 AddEventHandler("main", "OnEpilog", array("Ex2", "Ex2_93"));
+AddEventHandler("main", "OnBeforeEventAdd", array("Ex2", "ex2_51"));
 
 
 class Ex2
@@ -52,6 +53,34 @@ class Ex2
                 "MODULE_ID" => "main",
                 "ITEM_ID" => 123,
                 "DESCRIPTION" => $APPLICATION->GetCurPage(),
+            ));
+        }
+    }
+
+    function ex2_51(&$event, &$lid, &$arFields)
+    {
+        if ($event == "FEEDBACK_FORM") {
+
+            global $USER;
+            if ($USER->isAuthorized()) {
+
+                $arFields["AUTHOR2"] = GetMessage("EX2_S1_AUTH_USER", array(
+                    "#ID#" => $USER->GetId(),
+                    "#LOGIN#" => $USER->GetLogin(),
+                    "#NAME#" => $USER->GetFullName(),
+                    "#NAME_FORM#" => $arFields["AUTHOR"]
+                ));
+            } else {
+                $arFields["AUTHOR2"] = GetMessage("EX2_S1_NO_AUTH_USER", array(
+                    "#NAME_FORM#" => $arFields["AUTHOR"]
+                ));
+            }
+            CEventLog::Add(array(
+                "SEVERITY" => "SECURITY",
+                "AUDIT_TYPE_ID" => "FORMA",
+                "MODULE_ID" => "main",
+                "ITEM_ID" => $event,
+                "DESCRIPTION" => "CeventLog" . print_r($arFields["AUTHOR2"]),
             ));
         }
     }
