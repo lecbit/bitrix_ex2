@@ -148,7 +148,6 @@ class Ex2
 
             $ob = CIBlockElement::GetList(array(), $arFilter, false, false, $arSelect);
             if ($arRes = $ob->Fetch()) {
-                print_r($arRes);
                 $APPLICATION->SetPageProperty('title', $arRes["PROPERTY_TITLE_VALUE"]);
                 $APPLICATION->SetPageProperty('description', $arRes["PROPERTY_DESCRIPTION_VALUE"]);
             }
