@@ -51,7 +51,7 @@ class Ex2
                 "AUDIT_TYPE_ID" => "ERROR 404",
                 "MODULE_ID" => "main",
                 "ITEM_ID" => 123,
-                "DESCRIPTION" => "Какое-то описание",
+                "DESCRIPTION" => $APPLICATION->GetCurPage(),
             ));
         }
     }
