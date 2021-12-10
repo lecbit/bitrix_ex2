@@ -11,7 +11,8 @@ $APPLICATION->SetTitle("Простой компонент-ex2-70");
 		"PRODUCTS_IBLOCK_ID" => "2",
 		"PRODUCTS_IBLOCK_ID_PROPERTY" => "UF_NEWS_LINK",
 		"COMPONENT_TEMPLATE" => ".default",
-		"TEMPLATE_DETAIL_URL" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#"
+		"TEMPLATE_DETAIL_URL" => "catalog_exam/#SECTION_ID#/#ELEMENT_CODE#",
+		"ELEMENT_PER_PAGE" => "2"
 	),
 	false
 );?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
