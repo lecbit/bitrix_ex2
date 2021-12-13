@@ -35,4 +35,12 @@ echo GetMessage("FILTER_TITLE") . "<a href='" . $url . "'>" . $url . " </a>" . "
             <? } ?>
         <? } ?>
     </ul>
+    <br>
+    ---
+    <p>
+        <b>
+            <?= GetMessage("NAVY") ?>
+        </b>
+    </p>
+    <? echo $arResult["NAV_STRING"]; ?>
 <? } ?>
