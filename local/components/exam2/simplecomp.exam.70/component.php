@@ -180,6 +180,7 @@ if ($this->StartResultCache(false, array($cFilter, $arNavigation), "/servicesIbl
     }
 
     $arResult["NEWS"] = $arNews;
+    // $this->SetResultCacheKeys(array("PRODUCT_CNT")) -- Проверка кеша без данной строки;
 
     $this->SetResultCacheKeys(array("PRODUCT_CNT"));
     $this->includeComponentTemplate();

@@ -27,6 +27,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Оценка производительности 88", 
+		"/ekzamen-2/otsenka-proizvoditelnosti-88/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>
