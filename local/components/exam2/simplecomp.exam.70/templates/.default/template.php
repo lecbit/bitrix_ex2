@@ -1,7 +1,10 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 ---</br>
 <p><b><?= GetMessage("SIMPLECOMP_EXAM2_CAT_TITLE") ?></b></p>
-
+<?
+$url = $APPLICATION->GetCurPage() . "?F=Y";
+echo GetMessage("FILTER_TITLE") . "<a href='" . $url . "'>" . $url . " </a>" . "<br>";
+?>
 <? if (count($arResult["NEWS"]) > 0) { ?>
     <ul>
         <? foreach ($arResult["NEWS"] as $arNews) { ?>
