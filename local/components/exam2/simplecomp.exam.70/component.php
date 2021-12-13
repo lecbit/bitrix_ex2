@@ -42,7 +42,6 @@ if ($this->StartResultCache()) {
         $arNews[$newsElement["ID"]] = $newsElement;
     }
 
-    echo "<pre>"; print_r($arNewsId) ;echo "</pre>";
 
     $arSections = array();
     $arSectionsID = array();
@@ -69,7 +68,10 @@ if ($this->StartResultCache()) {
     }
 
     $obProduct = CIBlockElement::GetList(
-        array(),
+        array(
+            "NAME" => "asc",
+            "SORT" => "asc"
+        ),
         array(
             "IBLOCK_ID" => $arParams["PRODUCTS_IBLOCK_ID"],
             "ACTIVE" => "Y",
@@ -81,6 +83,7 @@ if ($this->StartResultCache()) {
             "NAME",
             "IBLOCK_SECTION_ID",
             "ID",
+            "CODE",
             "IBLOCK_ID",
             "PROPERTY_ARTNUMBER",
             "PROPERTY_MATERIAL",
@@ -91,6 +94,19 @@ if ($this->StartResultCache()) {
     $arResult["PRODUCT_CNT"] = 0;
 
     while ($arProduct = $obProduct->Fetch()) {
+        $arProduct["DETAIL_PAGE_URL"] = str_replace(
+            array(
+                "#SECTION_ID#",
+                "#ELEMENT_CODE#"
+            ),
+            array(
+                $arProduct["IBLOCK_SECTION_ID"],
+                $arProduct["CODE"]
+            ),
+            $arParams["TEMPLATE_DETAIL_URL"]
+        );
+
+
         $arResult["PRODUCT_CNT"]++;
         foreach ($arSections[$arProduct["IBLOCK_SECTION_ID"]][$arParams["PRODUCTS_IBLOCK_ID_PROPERTY"]] as $newsId) {
             $arNews[$newsId]["PRODUCTS"][] = $arProduct;
@@ -105,7 +121,7 @@ if ($this->StartResultCache()) {
     }
 
     $arResult["NEWS"] = $arNews;
-    
+
     $this->SetResultCacheKeys(array("PRODUCT_CNT"));
     $this->includeComponentTemplate();
 } else {
