@@ -16,9 +16,14 @@ echo GetMessage("FILTER_TITLE") . "<a href='" . $url . "'>" . $url . " </a>" . "
                 (<? implode(",", $arNews["SECTIONS"]); ?>)
             </li>
             <? if (count($arNews["PRODUCTS"]) > 0) { ?>
-                <ul>
+                <? $this->AddEditAction($arNews["ID"], $arResult["ADD_LINK"], CIBlock::GetArrayByID($arResult["IBLOCK_ID"], "ELEMENT_ADD")); ?>
+                <ul id="<?= $this->GetEditAreaId($arNews["ID"]); ?>">
                     <? foreach ($arNews["PRODUCTS"] as $arProduct) { ?>
-                        <li>
+                        <?
+                        $this->AddEditAction($arNews['ID'] . "_" . $arProduct['ID'], $arProduct['EDIT_LINK'], CIBlock::GetArrayByID($arProduct["IBLOCK_ID"], "ELEMENT_EDIT"));
+                        $this->AddDeleteAction($arNews['ID'] . "_" . $arProduct['ID'], $arProduct['DELETE_LINK'], CIBlock::GetArrayByID($arProduct["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+                        ?>
+                        <li id="<?= $this->GetEditAreaId($arNews['ID'] . "_" . $arProduct['ID']); ?>">
                             <?= $arProduct["NAME"] ?> -
                             <?= $arProduct["PROPERTY_PRICE_VALUE"] ?> -
                             <?= $arProduct["PROPERTY_MATERIAL_VALUE"] ?> -
