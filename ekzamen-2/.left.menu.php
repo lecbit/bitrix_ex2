@@ -41,6 +41,13 @@ $aMenuLinks = Array(
 		Array(), 
 		Array(), 
 		"" 
+	),
+	Array(
+		"Комплексный компонент", 
+		"/ekzamen-2/kompleksnyy-komponent/", 
+		Array(), 
+		Array(), 
+		"" 
 	)
 );
 ?>
