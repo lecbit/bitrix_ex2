@@ -24,6 +24,19 @@ if (isset($_REQUEST["F"])) {
     $cFilter = true;
 }
 
+global $USER;
+if ($USER->IsAuthorized()) {
+    $arButtons = CIBlock::GetPanelButtons($arParams["PRODUCTS_IBLOCK_ID"]);
+    $this->AddIncludeAreaIcons(array(
+        array(
+            "ID" => "linklb",
+            "TITLE" => "ИБ в админке",
+            "URL" => $arButtons["submenu"]["element_list"]["ACTION_URL"],
+            "IN_PARAMS_MENU" => true
+        )
+    ));
+}
+
 if ($this->StartResultCache(false, array($cFilter))) {
     $arNews = array();
     $arNewsId = array();
@@ -118,7 +131,7 @@ if ($this->StartResultCache(false, array($cFilter))) {
             0,
             array("SECTION_BUTTONS" => false, "SESSID" => false)
         );
-        
+
         $arProduct["EDIT_LINK"] = $arButtons["edit"]["edit_element"]["ACTION_URL"];
         $arProduct["DELETE_LINK"] = $arButtons["edit"]["delete_element"]["ACTION_URL"];
 
